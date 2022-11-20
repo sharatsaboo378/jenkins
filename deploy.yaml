@@ -16,7 +16,7 @@ spec:
       - name: myregistrykey
       containers:
       - name: aks-app-jenkins
-        image: <enter-dockerhub-repo-name>/aks-pipeline:latest
+        image: sharatsaboo378/jenkins/aks-pipeline:latest
         ports:
         - containerPort: 80
         imagePullPolicy: Always
