@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aks-app-jenkins
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aks-app-jenkins
+  template:
+    metadata:
+      labels:
+        app: aks-app-jenkins
+    spec:
+      imagePullSecrets:
+      - name: myregistrykey
+      containers:
+      - name: aks-app-jenkins
+        image: <enter-dockerhub-repo-name>/aks-pipeline:latest
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aks-app-jenkins
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+  selector:
+    app: aks-app-jenkins
